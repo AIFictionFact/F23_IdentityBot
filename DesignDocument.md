@@ -1,9 +1,10 @@
 # CSCI 4970 – AI in Fiction & Fact
 ## Design Documentation
 
-**Title**
-Project: IdentityBot
+**Title:** IdentityBot
+
 **Names:** Emma Clements (clemee3), Sam Francis (francs3), Annie Xu (xuj18)
+
 **Github Link:** [IdentityBot Repository](https://github.com/AIFictionFact/F23_IdentityBot)
 
 ## Project Overview

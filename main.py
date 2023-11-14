@@ -25,7 +25,7 @@ def main():
     print("Part 1: Questions about you")
     print("In this stage of the interview, we will ask about you to better understand your preferences and personality.")
     
-    self_responses = interviewer.interview_about_self()
+    user_responses = interviewer.interview_about_user()
 
     print()
     print("Part 2: Questions about your subject")
@@ -36,10 +36,10 @@ def main():
     print()
 
     # Train the AI
-    model = conversation.train_model(self_responses, subject_responses)
+    model = conversation.train_model(user_responses, subject_responses)
 
     # Have a conversation
-    conversation.conduct_conversation(model, self_responses, subject_responses)
+    conversation.conduct_conversation(model, user_responses, subject_responses)
     
 
 if __name__ == "__main__":

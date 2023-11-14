@@ -5,7 +5,7 @@ import openai
 # Import interviewer and conversation modules
 import interviewer
 import conversation
-
+import tkinter as tk;
 def main():
 
     # Load key

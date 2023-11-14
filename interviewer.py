@@ -6,6 +6,7 @@ It doesn't need access to the OpenAI API because it's simply asking questions an
 the responses.
 '''
 
+
 def interview_about_user():
     # Dictionary to store responses
     responses = {}
@@ -27,4 +28,6 @@ def interview_about_subject():
     questions.close()
 
     return responses
+
+
     

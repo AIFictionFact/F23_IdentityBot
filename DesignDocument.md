@@ -72,3 +72,4 @@ The UI will be very simple to make it easy for the user to understand the progra
 - **Lack of Real-Time Updates:** The personality of the chatbot will be static, meaning if the personality of this person evolves over time, the chatbot will not be able to know how this person has changed.
 - **User Interface:** The user interface will not have any animations for a visual representation of the person, so it will lack the visual aspect of a conversation.
 - **Subjectivity:** The way a person perceives someone's personality can be very subjective, so being able to capture the personality of someone the way that...
+

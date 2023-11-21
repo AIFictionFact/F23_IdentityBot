@@ -39,7 +39,8 @@ The main components are Python and the OpenAI API. The user will enter answers t
 
 ## Technologies to be Used
 - **Python:** Script and Automation, Data Handling, API Integration, Backend Development
-- **OpenAI API:** Language Model, Fine-Tuning, Conversation State Management, Sentiment Analysis
+- **OpenAI API:** Language Model, Fine-Tuning, Conversation State Management
+- **Textblob:** Sentiment Analysis
 - **GitHub:** Version Control, Code Collaboration
 
 ## User Profiles

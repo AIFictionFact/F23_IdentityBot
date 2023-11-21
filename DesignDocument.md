@@ -35,6 +35,8 @@ IdentityBot aims to simulate conversations with virtual representations of peopl
 ## System Architecture
 The main components are Python and the OpenAI API. The user will enter answers to basic questions, which are processed in Python and passed to the OpenAI API, used to tune its parameters. Then Python uses the OpenAI API to start a conversation with the user, which consists of getting user input, processing it in Python, passing it to OpenAI API, fetching a response, and printing the response in Python. Python is used to store data associated with a user, such as the unique profiles associated with that user, and their conversation history. This data is used to train OpenAI to respond in a convincing way.
 
+![Flow Diagram](flow.png) 
+
 ## Technologies to be Used
 - **Python:** Script and Automation, Data Handling, API Integration, Backend Development
 - **OpenAI API:** Language Model, Fine-Tuning, Conversation State Management, Sentiment Analysis

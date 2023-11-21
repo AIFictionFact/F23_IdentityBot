@@ -71,7 +71,8 @@ def main():
     print()
 
     # Train the AI
-    model = conversation.train_model(user_responses, subject_responses)
+    #model = conversation.train_model(user_responses, subject_responses)
+    model = "gpt-3.5-turbo"
 
     # Have a conversation
     conversation.conduct_conversation(model, user_responses, subject_responses)

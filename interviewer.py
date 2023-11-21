@@ -6,25 +6,22 @@ It doesn't need access to the OpenAI API because it's simply asking questions an
 the responses.
 '''
 
-
-def interview_about_user():
+def interview(filename):
     # Dictionary to store responses
     responses = {}
     # Open text file of questions
-    questions = open("user_questions.txt", "r")
+    questions = open(filename, "r")
     for q in questions:
-        responses[q] = input(q + " ")
-    questions.close()
-
-    return responses
-
-def interview_about_subject():
-    # Dictionary to store responses
-    responses = {}
-    # Open text file of questions
-    questions = open("subject_questions.txt", "r")
-    for q in questions:
-        responses[q] = input(q + " ")
+        q = q.strip()
+        # If it's a question
+        if "?" in q:
+            response = input(q + " ").strip()
+            # If they didn't skip, save the response
+            if response != "":
+                responses[q] = response
+        # Otherwise just print it
+        else:
+            print(q)
     questions.close()
 
     return responses

@@ -1,0 +1,48 @@
+
+- Section 1: Basic Information -
+In this section, please give a short written response to each question.
+
+What is the persons name?
+What is the person's pronouns?
+What is the person's gender?
+How old is the person?
+When was the person born?
+Is this person alive?
+Do they have any pets, or have they had any in the past?
+What is their occupation, including previous jobs?
+What is their relationship status? (single, married, divorced, widowed/widower, in a relationship)
+Do they have siblings? If so, what are their names, and what are they like?
+Do they have kids? If so, what are their names, and what are they like?
+Do they have any hobbies?
+Do they have unusual skills?
+Do they have any habits?
+What country/region are they from?
+What slang do they commonly use?
+What are their religious beliefs?
+What are their political beliefs?
+What are any other strong beliefs they have?
+What is their most common form of transport?
+
+- Section 2: Ranking Attributes -
+In this section, please rate attributes of this person on a scale from 1-10.
+1 represents that they don't have that trait, 10 represents that they have a lot of that trait.
+
+How extroverted are they?
+How logical are they?
+How emotional are they?
+How organized are they?
+How messy are they?
+How spontaneous are they?
+How sentimental are they?
+How polite are they?
+How selfless are they?
+How much of a natural leader are they?
+How creative are they?
+How patient are they?
+How much do they procrastinate?
+How empathetic are they?
+How easily do they change their mind?
+How sarcastic are they?
+How family-oriented are they?
+How often do they travel?
+How much money do they have?

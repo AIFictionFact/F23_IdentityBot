@@ -35,9 +35,12 @@ IdentityBot aims to simulate conversations with virtual representations of peopl
 ## System Architecture
 The main components are Python and the OpenAI API. The user will enter answers to basic questions, which are processed in Python and passed to the OpenAI API, used to tune its parameters. Then Python uses the OpenAI API to start a conversation with the user, which consists of getting user input, processing it in Python, passing it to OpenAI API, fetching a response, and printing the response in Python. Python is used to store data associated with a user, such as the unique profiles associated with that user, and their conversation history. This data is used to train OpenAI to respond in a convincing way.
 
+![Flow Diagram](flow.png) 
+
 ## Technologies to be Used
 - **Python:** Script and Automation, Data Handling, API Integration, Backend Development
-- **OpenAI API:** Language Model, Fine-Tuning, Conversation State Management, Sentiment Analysis
+- **OpenAI API:** Language Model, Fine-Tuning, Conversation State Management
+- **Textblob:** Sentiment Analysis
 - **GitHub:** Version Control, Code Collaboration
 
 ## User Profiles
@@ -70,6 +73,16 @@ The UI will be very simple to make it easy for the user to understand the progra
 - **Limited Data Set:** We are only gathering details about a person through a questionnaire, so more intricate aspects of their verbal behavior might not be able to be recreated without a large data set like text messages or phone calls.
 - **Privacy:** Using personal information about someone like text messages and phone calls could violate the privacy of those conversations as the person may not consent to their texts being seen by other people.
 - **Lack of Real-Time Updates:** The personality of the chatbot will be static, meaning if the personality of this person evolves over time, the chatbot will not be able to know how this person has changed.
-- **User Interface:** The user interface will not have any animations for a visual representation of the person, so it will lack the visual aspect of a conversation.
-- **Subjectivity:** The way a person perceives someone's personality can be very subjective, so being able to capture the personality of someone the way that...
+- **User Interface:** We have to figure out how to implement a user interface using Python. It may be a text-based user interface.
+- **Difficulty Testing** Because of the long interview stage, it can be difficult to test the program. To solve this, we added an option to import text files with answers to the questions.
+- **AI Fine-Tuning** It is difficult to train the OpenAI API to pretend to be someone else. Usually it will admit to being an AI. We are researching ways to improve this and get the AI to take on a different role.
+
+## Test Plan
+For testing, we will use mainly manual testing by the developers, because there are dynamic features such as responses that could change based on many factors, which are difficult to automatically test. We may develop some unit tests as well, using the Python unittest module, especially as we reach the end of the project.
+We will generate test cases related to these features:
+- Creation of multiple user profiles
+- Personalization influencing responses
+- Providing emotional support
+- Tracking multiple conversations
+- User interface
 

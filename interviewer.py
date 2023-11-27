@@ -9,6 +9,8 @@ the responses.
 def interview(filename):
     # Dictionary to store responses
     responses = {}
+    # Name of subject
+    name = ""
     # Open text file of questions
     questions = open(filename, "r")
     for q in questions:
@@ -19,9 +21,11 @@ def interview(filename):
             # If they didn't skip, save the response
             if response != "":
                 responses[q] = response
+            if q == "How do you refer to this person?":
+                name = response
         # Otherwise just print it
         else:
             print(q)
     questions.close()
 
-    return responses
+    return responses, name

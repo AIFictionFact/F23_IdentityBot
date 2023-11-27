@@ -10,6 +10,7 @@ import conversation
 def load_dictionary(filename):
     file = open(filename, "r")
     dictionary = {}
+    name = ""
     for line in file:
         line = line.split("|")
         line[0] = line[0].strip()
@@ -17,8 +18,10 @@ def load_dictionary(filename):
         # Skip blank responses
         if line[1] == "":
             continue
+        if line[0] == "How do you refer to this person?":
+            name = line[1]
         dictionary[line[0]] = line[1]
-    return dictionary
+    return dictionary, name
 
 def main():
 
@@ -43,29 +46,30 @@ def main():
 
     user_responses = {}
     subject_responses = {}
+    name = ""
 
     # Manual input answers
     if user_input == "1":
         print()
         print("Part 1: Responses from you")
-        print("In this stage of the interview, we will ask about you to better understand your preferences and personality.")
+        print("In this stage of the interview, we will ask about you and your subject, from your perspective.")
         
-        user_responses = interviewer.interview("user_questions.txt")
-        print(user_responses)      
+        user_responses, name = interviewer.interview("user_questions.txt")
+        #print(user_responses)      
 
         print()
         print("Part 2: Responses from your subject")
-        print("In the second stage of the interview, we will ask about the subject that you wish to have a conversation with to gain a better understanding of who they are as a person.")
+        print("In the second stage of the interview, we will ask about the subject to gain a better understanding of who they are as a person.")
         print("In this section, answer the questions AS IF YOU WERE YOUR SUBJECT. Pretend you are your subject, and respond as you think they would to these questions.")
 
-        subject_responses = interviewer.interview("subject_questions.txt")
+        subject_responses, _ = interviewer.interview("subject_questions.txt")
 
     # Import file
     else:
         filename = input("Please enter the file for user responses: ").strip()
-        user_responses = load_dictionary(filename)
+        user_responses, name = load_dictionary(filename)
         filename = input("Please enter a file for subject responses: ")
-        subject_responses = load_dictionary(filename)
+        subject_responses, _ = load_dictionary(filename)
     #print(user_responses)
     #print(subject_responses)
 
@@ -76,7 +80,7 @@ def main():
     model = "gpt-3.5-turbo"
 
     # Have a conversation
-    conversation.conduct_conversation(model, user_responses, subject_responses)
+    conversation.conduct_conversation(model, user_responses, subject_responses, name)
     
 
 if __name__ == "__main__":

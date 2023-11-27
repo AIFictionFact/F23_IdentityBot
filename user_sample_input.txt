@@ -1,5 +1,6 @@
 What relation is this person to you?|mother
 How does the person refer to you?|Bob
+How do you refer to this person?|Mom
 Where are you from?|Texas
 When did you first meet the person?|1982
 How old were you when you first met this person?|0

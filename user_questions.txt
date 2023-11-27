@@ -1,5 +1,6 @@
 What relation is this person to you?
 How does the person refer to you?
+How do you refer to this person?
 Where are you from?
 When did you first meet the person?
 How old were you when you first met this person?

@@ -47,16 +47,17 @@ def main():
     # Manual input answers
     if user_input == "1":
         print()
-        print("Part 1: Questions about you")
+        print("Part 1: Responses from you")
         print("In this stage of the interview, we will ask about you to better understand your preferences and personality.")
         
         user_responses = interviewer.interview("user_questions.txt")
-        print(user_responses)
+        print(user_responses)      
 
         print()
-        print("Part 2: Questions about your subject")
-        print("In the second stage of the interview, we will ask about the subject athat you wish to have a conversation with to gain a better understanding of who they are as a person.")
-        
+        print("Part 2: Responses from your subject")
+        print("In the second stage of the interview, we will ask about the subject that you wish to have a conversation with to gain a better understanding of who they are as a person.")
+        print("In this section, answer the questions AS IF YOU WERE YOUR SUBJECT. Pretend you are your subject, and respond as you think they would to these questions.")
+
         subject_responses = interviewer.interview("subject_questions.txt")
 
     # Import file
@@ -65,8 +66,8 @@ def main():
         user_responses = load_dictionary(filename)
         filename = input("Please enter a file for subject responses: ")
         subject_responses = load_dictionary(filename)
-    print(user_responses)
-    print(subject_responses)
+    #print(user_responses)
+    #print(subject_responses)
 
     print()
 

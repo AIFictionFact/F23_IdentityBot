@@ -17,9 +17,19 @@ def analyze_sentiment(text):
 
 def train_model(user_responses, subject_responses):
     training_data = []
-    for question, answer in zip(user_responses.items(), subject_responses.items()):
-        training_data.append({"role": "user", "content": question[1]})
-        training_data.append({"role": "assistant", "content": answer[1]})
+    content = "Can you respond to the next questions as if you were this person?"
+    # System role is based on the user questionaire
+    for question in user_responses.items():
+        content += " " + question[0]
+        content += " " + question[1]
+    training_data.append({"role": "system", "content": content})   
+
+    # User and Assitant roles are based on subject questionaire
+    for question in subject_responses.items():
+        training_data.append({"role": "user", "content": question[0]})
+        training_data.append({"role": "assistant", "content": question[1]})
+
+    print(training_data)
     return training_data
 
 def get_gpt_response(conversation_history, model):

@@ -1,49 +1,34 @@
-
-- Section 1: Basic Information -
-In this section, please give a short written response to each question.
-
-What is the persons name?
-How do you refer to this person?
-What is the person's pronouns?
-What is the person's gender?
-How old is the person?
-When was the person born?
-Is this person alive?
-Do they have any pets, or have they had any in the past?
-What is their occupation, including previous jobs?
-What is their relationship status?
-Do they have siblings? If so, what are their names, and what are they like?
-Do they have kids? If so, what are their names, and what are they like?
-Do they have any hobbies?
-Do they have unusual skills?
-Do they have any habits?
-What country/region are they from?
-What slang do they commonly use?
-What are their religious beliefs?
-What are their political beliefs?
-What are any other strong beliefs they have?
-What is their most common form of transport?
-
-- Section 2: Ranking Attributes -
-In this section, please rate attributes of this person on a scale from 1-10.
-1 represents that they don't have that trait, 10 represents that they have a lot of that trait.
-
-How extroverted are they?
-How logical are they?
-How emotional are they?
-How organized are they?
-How messy are they?
-How spontaneous are they?
-How sentimental are they?
-How polite are they?
-How selfless are they?
-How much of a natural leader are they?
-How creative are they?
-How patient are they?
-How much do they procrastinate?
-How empathetic are they?
-How easily do they change their mind?
-How sarcastic are they?
-How family-oriented are they?
-How often do they travel?
-How much money do they have?
+What is your name?
+What are your pronouns?
+What is your gender?
+How old are you?
+When were you born?
+Do you have any pets, or did you have any in the past?
+What is your occupation, including previous jobs?
+What is your relationship status?
+Do you have any siblings? If so, what are their names, and what are they like?
+Do you have any kids? If so, what are their names, and what are they like?
+What are your favorite hobbies?
+What are your habits?
+Do you have unusual skills?
+Can you describe the place that you're from?
+What are your religious beliefs?
+What are your political beliefs?
+Do you have any other strong beliefs?
+What is your most common form of transport?
+How extroverted are you?
+How logical are you?
+How emotional are you?
+How organized are you?
+How spontaneous are you?
+How selfless are you?
+How much of a natural leader are you?
+How creative are you?
+How patient are you?
+How much do you procrastinate?
+How easily do you change your mind?
+How sarcastic are you?
+How family-oriented are you?
+How often do you travel?
+How much money do you have?
+How was your day today?

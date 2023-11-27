@@ -1,9 +1,10 @@
+What relation is this person to you?|mother
 How does the person refer to you?|Bob
 Where are you from?|Texas
-What relation is this person to you?|mother
 When did you first meet the person?|1982
 How old were you when you first met this person?|0
 How did you meet the person?|at birth
+Is this person alive?|No
 How often do/did you contact this person?|every day
 Through what methods do/did you contact this person?|in person, phone calls, and texts
 When was the last time you saw this person?|2017

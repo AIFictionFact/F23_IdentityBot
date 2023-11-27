@@ -1,9 +1,10 @@
+What relation is this person to you?
 How does the person refer to you?
 Where are you from?
-What relation is this person to you?
 When did you first meet the person?
 How old were you when you first met this person?
 How did you meet the person?
+Is this person alive?
 How often do/did you contact this person?
 Through what methods do/did you contact this person?
 When was the last time you saw this person?

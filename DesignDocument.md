@@ -106,7 +106,7 @@ We will generate test cases related to these features:
 
 ## Ethical Use Plan
 
-- User Consent and Privacy: Inform users about data collection and usage, ensuring transparency in data handling and storage.
-- Bias and Fairness:  Regularly test and update the model to eliminate biases and ensure fair treatment of all users.
-- Accuracy and Misinformation: Continuously monitor and refine the model for accurate information and prevent the spread of misinformation.
-- Emotional Support and Psychological Safety: Design empathetic interactions, clarifying the chatbot's role as supportive but not a substitute for professional help.
+- **User Consent and Privacy:** Inform users about data collection and usage, ensuring transparency in data handling and storage.
+- **Bias and Fairness:**  Regularly test and update the model to eliminate biases and ensure fair treatment of all users.
+- **Accuracy and Misinformation:** Continuously monitor and refine the model for accurate information and prevent the spread of misinformation.
+- **Emotional Support and Psychological Safety:** Design empathetic interactions, clarifying the chatbot's role as supportive but not a substitute for professional help.

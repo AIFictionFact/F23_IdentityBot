@@ -39,8 +39,7 @@ The main components are Python and the OpenAI API. The user will enter answers t
 
 ## Technologies to be Used
 - **Python:** Script and Automation, Data Handling, API Integration, Backend Development
-- **OpenAI API:** Language Model, Fine-Tuning, Conversation State Management
-- **Textblob:** Sentiment Analysis
+- **OpenAI API:** Language Model, Fine-Tuning, Conversation State Management, Sentiment Analysis
 - **GitHub:** Version Control, Code Collaboration
 
 ## User Profiles
@@ -64,6 +63,12 @@ The UI will be very simple to make it easy for the user to understand the progra
 - You: I’m doing good, how is your dog?
 - James: He has as much energy as ever, he plays with his squeaky toy every day!
 
+**GUI Development:**
+- Add a simple GUI interface using an external library for Python.
+- Planning to use Tkinter, PyQt, or Kivy for the GUI framework.
+- Plan to Mimic Phone Texting Interface to offer a familiar and intuitive user experience.
+- The GUI will include features like input fields for text, a display area for conversation history, and possibly send/receive buttons, resembling messaging apps.
+
 ## Team Roles
 - **Emma – Lead Developer:** Responsible for developing the core components of the chatbot, including conversational and personalization features.
 - **Annie – API Integrations:** Responsible for integrating, training, and tuning parameters for the external ChatGPT API.
@@ -86,3 +91,22 @@ We will generate test cases related to these features:
 - Tracking multiple conversations
 - User interface
 
+**Chatbot Response Accuracy:**
+- Test how accurately the chatbot responds as if it were the subject described by the user.
+- Use a set of predefined questions and evaluate if the responses align with the subject's expected personality and knowledge.
+- Mostly manual testing.
+
+**Few-Shot Fine Tuning Effectivenes:**
+- Assess the impact of few-shot fine tuning on the bot's responses.
+- Compare responses before and after fine-tuning with user and subject data.
+
+**Sentiment Analysis Accuracy:**
+- Test how well the chatbot identifies and responds to various sentiments in user inputs.
+- Provide inputs with different emotional tones and evaluate the chatbot’s responses.
+
+## Ethical Use Plan
+
+- User Consent and Privacy: Inform users about data collection and usage, ensuring transparency in data handling and storage.
+- Bias and Fairness:  Regularly test and update the model to eliminate biases and ensure fair treatment of all users.
+- Accuracy and Misinformation: Continuously monitor and refine the model for accurate information and prevent the spread of misinformation.
+- Emotional Support and Psychological Safety: Design empathetic interactions, clarifying the chatbot's role as supportive but not a substitute for professional help.

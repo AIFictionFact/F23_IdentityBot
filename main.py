@@ -6,23 +6,6 @@ import openai
 import interviewer
 import conversation
 
-# Load a file into a dictionary, for testing
-def load_dictionary(filename):
-    file = open(filename, "r")
-    dictionary = {}
-    name = ""
-    for line in file:
-        line = line.split("|")
-        line[0] = line[0].strip()
-        line[1] = line[1].strip()
-        # Skip blank responses
-        if line[1] == "":
-            continue
-        if line[0] == "How do you refer to this person?":
-            name = line[1]
-        dictionary[line[0]] = line[1]
-    return dictionary, name
-
 def main():
 
     # Load key
@@ -51,8 +34,11 @@ def main():
     # Manual input answers
     if user_input == "1":
         print()
+        print("In this interview, you can skip questions at any time. Just press enter to move on.")
+        print()
         print("Part 1: Responses from you")
-        print("In this stage of the interview, we will ask about you and your subject, from your perspective.")
+        print("In this stage of the interview, we will simulate your subject asking you questions. Please respond from your perspective.")
+        print()
         
         user_responses, name = interviewer.interview("user_questions.txt")
         #print(user_responses)      
@@ -60,20 +46,29 @@ def main():
         print()
         print("Part 2: Responses from your subject")
         print("In the second stage of the interview, we will ask about the subject to gain a better understanding of who they are as a person.")
-        print("In this section, answer the questions AS IF YOU WERE YOUR SUBJECT. Pretend you are your subject, and respond as you think they would to these questions.")
+        print("In this section, answer the questions as if you were your subject. Respond as you think they would to these questions.")
+        print()
 
         subject_responses, _ = interviewer.interview("subject_questions.txt")
 
     # Import file
     else:
         filename = input("Please enter the file for user responses: ").strip()
-        user_responses, name = load_dictionary(filename)
+        user_responses, name = interviewer.load_dictionary(filename)
         filename = input("Please enter a file for subject responses: ")
-        subject_responses, _ = load_dictionary(filename)
+        subject_responses, _ = interviewer.load_dictionary(filename)
     #print(user_responses)
     #print(subject_responses)
 
     print()
+
+    user_input = ""
+    while (user_input.lower() != "yes" and user_input.lower() != "no"):
+        user_input = input(f"[Optional] Would you like to import texts between you and {name}? Please respond yes or no. ").strip()
+
+    if user_input.lower() == "yes":
+        # Import texts
+        pass
 
     # Train the AI
     #model = conversation.train_model(user_responses, subject_responses)

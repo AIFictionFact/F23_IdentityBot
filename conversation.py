@@ -15,21 +15,27 @@ def analyze_sentiment(text):
     analysis = TextBlob(text)
     return "positive" if analysis.sentiment.polarity > 0 else "neutral" if analysis.sentiment.polarity == 0 else "negative"
 
-def tune_model(user_responses, subject_responses):
+def tune_model(user_responses, subject_responses, name):
     tuning_data = []
-    content = "Can you respond to the next questions as if you were this person?"
-    # System role is based on the user questionnaire
-    for question in user_responses.items():
-        content += " " + question[0]
-        content += " " + question[1]
-    tuning_data.append({"role": "system", "content": content})   
 
-    # User and Assistant roles are based on subject questionnaire
+    # System role is just the person's name
+    tuning_data.append({"role": "system", "content": f"Can you respond to the following questions as if you were {name}?"})
+
+    # First sample prompt
+    tuning_data.append({"role": "user", "content": "Who are you?"})
+    tuning_data.append({"role": "assistant", "content": f"I'm {name}, of course."})
+
+    # User questionnaire is the assistant asking questions and the user responding
+    for question in user_responses.items():
+        tuning_data.append({"role": "assistant", "content": question[0]})
+        tuning_data.append({"role": "user", "content": question[1]})
+
+    # Subject questionnaire is reversed
     for question in subject_responses.items():
         tuning_data.append({"role": "user", "content": question[0]})
         tuning_data.append({"role": "assistant", "content": question[1]})
 
-    #print(tuning_data)
+    print(tuning_data)
     return tuning_data
 
 def get_gpt_response(conversation_history, model):
@@ -49,7 +55,7 @@ def get_gpt_response(conversation_history, model):
 def chat_with_bot(user_message, trained_context, model):
     sentiment = analyze_sentiment(user_message)
     full_conversation_history = trained_context + conversation_history.copy()
-    full_conversation_history.append({"role": "user", "content": f"{user_message}"})
+    full_conversation_history.append({"role": "user", "content": f"{user_message}, this message is in a {sentiment} tone."})
     
     bot_message = get_gpt_response(full_conversation_history, model)
     
@@ -57,15 +63,17 @@ def chat_with_bot(user_message, trained_context, model):
     return bot_message
 
 def conduct_conversation(model, user_responses, subject_responses, name):
-    trained_context = tune_model(user_responses, subject_responses)
+    trained_context = tune_model(user_responses, subject_responses, name)
     stop_word = "stop"
-    response = ""
+    user_message = ""
 
     print("Welcome to IdentityBot. Type 'stop' at any time to end the chat.")
     print()
 
-    while response != stop_word:
+    while user_message != stop_word:
         user_message = input("You: ")
+        if user_message == stop_word:
+            break
         store_user_data(user_message)
         bot_response = chat_with_bot(user_message, trained_context, model)
         print(f"{name}: {bot_response}")

@@ -15,17 +15,30 @@ def interview(filename):
     questions = open(filename, "r")
     for q in questions:
         q = q.strip()
-        # If it's a question
-        if "?" in q:
-            response = input(q + " ").strip()
-            # If they didn't skip, save the response
-            if response != "":
-                responses[q] = response
-            if q == "How do you refer to this person?":
-                name = response
-        # Otherwise just print it
-        else:
-            print(q)
+        response = input(q + " ").strip()
+        if q == "How do you refer to me?":
+            name = response
+        # If they didn't skip, save the response
+        if response != "":
+            responses[q] = response
     questions.close()
 
     return responses, name
+
+# Load a file into a dictionary, for testing
+def load_dictionary(filename):
+    file = open(filename, "r")
+    dictionary = {}
+    name = ""
+    for line in file:
+        line = line.split("|")
+        line[0] = line[0].strip()
+        line[1] = line[1].strip()
+        # Store name
+        if line[0] == "How do you refer to me?":
+            name = line[1]
+        # Skip blank responses
+        if line[1] == "":
+            continue
+        dictionary[line[0]] = line[1]
+    return dictionary, name

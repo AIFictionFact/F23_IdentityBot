@@ -1,3 +1,8 @@
+'''
+This file conducts a conversation with the user and the OpenAI API,
+which takes on the personality of the subject by fine tuning the API.
+'''
+
 import openai
 from textblob import TextBlob
 
@@ -9,19 +14,32 @@ with open("API_KEY.txt", "r") as keyfile:
 conversation_history = []
 
 def store_user_data(user_message):
+    '''
+    Stores a user message in conversation history
+    '''
     conversation_history.append({"role": "user", "content": user_message})
 
 def analyze_sentiment(text):
+    '''
+    Analyzes the sentiment of text using TextBlob
+    Returns positive, neutral, or negative
+    '''
     analysis = TextBlob(text)
     return "positive" if analysis.sentiment.polarity > 0 else "neutral" if analysis.sentiment.polarity == 0 else "negative"
 
 def tune_model(user_responses, subject_responses, name):
+    '''
+    Fine-tunes the API given a dictionary of user responses, subject responses, and the subject's name
+    This establishes the system role telling the API to respond as if they were the subject
+    It also gives examples of user/assistant roles through fine tuning
+    Returns the tuning data as a list of dictionaries
+    '''
     tuning_data = []
 
     # System role is just the person's name
     tuning_data.append({"role": "system", "content": f"Can you respond to the following questions as if you were {name}?"})
 
-    # First sample prompt
+    # First sample prompt, to solidify the API is the subject's name
     tuning_data.append({"role": "user", "content": "Who are you?"})
     tuning_data.append({"role": "assistant", "content": f"I'm {name}, of course."})
 
@@ -30,18 +48,17 @@ def tune_model(user_responses, subject_responses, name):
         tuning_data.append({"role": "assistant", "content": question[0]})
         tuning_data.append({"role": "user", "content": question[1]})
 
-    # Subject questionnaire is reversed
+    # Subject questionnaire is the user asking questions and the assistant responding
     for question in subject_responses.items():
         tuning_data.append({"role": "user", "content": question[0]})
         tuning_data.append({"role": "assistant", "content": question[1]})
 
-    print(tuning_data)
     return tuning_data
 
 def get_gpt_response(conversation_history, model):
-    # Debugging: Print the conversation history and model to check structure
-    #print("Sending to OpenAI API:", conversation_history, model)
-
+    '''
+    Returns the response of the API based on the conversation history
+    '''
     try:
         response = openai.ChatCompletion.create(
             model=model,
@@ -53,6 +70,9 @@ def get_gpt_response(conversation_history, model):
         return "Error: Could not generate a response."
 
 def chat_with_bot(user_message, trained_context, model):
+    '''
+    Sends a user message to the bot, and returns the bot's response
+    '''
     sentiment = analyze_sentiment(user_message)
     full_conversation_history = trained_context + conversation_history.copy()
     full_conversation_history.append({"role": "user", "content": f"{user_message}, this message is in a {sentiment} tone."})
@@ -63,6 +83,9 @@ def chat_with_bot(user_message, trained_context, model):
     return bot_message
 
 def conduct_conversation(model, user_responses, subject_responses, name):
+    '''
+    Runs a loop to conduct the entire conversation with the bot
+    '''
     trained_context = tune_model(user_responses, subject_responses, name)
     stop_word = "stop"
     user_message = ""

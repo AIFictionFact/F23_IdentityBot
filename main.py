@@ -1,3 +1,12 @@
+'''
+This file contains the main code for IdentityBot.
+It uses two other Python files, interviewer.py and conversation.py.
+
+It facilitates conducting a conversation with a subject of the user's choice,
+based on their description of the subject, which is used to fine-tune
+the OpenAI ChatGPT API to replicate the subject.
+'''
+
 # Import openai and os
 import os
 import openai
@@ -41,7 +50,6 @@ def main():
         print()
         
         user_responses, name = interviewer.interview("user_questions.txt")
-        #print(user_responses)      
 
         print()
         print("Part 2: Responses from your subject")
@@ -57,9 +65,10 @@ def main():
         user_responses, name = interviewer.load_dictionary(filename)
         filename = input("Please enter a file for subject responses: ")
         subject_responses, _ = interviewer.load_dictionary(filename)
-    #print(user_responses)
-    #print(subject_responses)
 
+    
+    # Text history - not implemented
+    '''
     print()
 
     user_input = ""
@@ -69,9 +78,9 @@ def main():
     if user_input.lower() == "yes":
         # Import texts
         pass
+    '''
 
     # Train the AI
-    #model = conversation.train_model(user_responses, subject_responses)
     model = "gpt-3.5-turbo"
 
     # Have a conversation

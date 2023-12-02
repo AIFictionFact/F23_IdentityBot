@@ -7,6 +7,10 @@ the responses.
 '''
 
 def interview(filename):
+    '''
+    Option 1: Manually interview a subject through Q&A prompts
+    Returns a dictionary, and the name of the subject
+    '''
     # Dictionary to store responses
     responses = {}
     # Name of subject
@@ -27,6 +31,10 @@ def interview(filename):
 
 # Load a file into a dictionary, for testing
 def load_dictionary(filename):
+    '''
+    Option 2: Load a .txt file following a specific format
+    Returns a dictionary, and the name of the subject
+    '''
     file = open(filename, "r")
     dictionary = {}
     name = ""

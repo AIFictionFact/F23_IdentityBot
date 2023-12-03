@@ -3,6 +3,7 @@
 In this section, please give a short written response to each question.
 
 What is the persons name?
+How do you refer to this person?
 What is the person's pronouns?
 What is the person's gender?
 How old is the person?
@@ -10,7 +11,7 @@ When was the person born?
 Is this person alive?
 Do they have any pets, or have they had any in the past?
 What is their occupation, including previous jobs?
-What is their relationship status? (single, married, divorced, widowed/widower, in a relationship)
+What is their relationship status?
 Do they have siblings? If so, what are their names, and what are they like?
 Do they have kids? If so, what are their names, and what are they like?
 Do they have any hobbies?

@@ -1,15 +1,14 @@
-How does the person refer to you?
+What relation am I to you?
+How do I refer to you?
+How do you refer to me?
 Where are you from?
-What relation is this person to you?
-When did you first meet the person?
-How old were you when you first met this person?
-How did you meet the person?
-How often do/did you contact this person?
-Through what methods do/did you contact this person?
-When was the last time you saw this person?
-How do you feel about this person?
-What common interests do you have with this person?
-What do you miss most about this person?
-What is an important memory that you share with this person?
-What is a second important memory that you share with this person?
-What is a third important memory that you share with this person?
+When did we first meet?
+How old were you when we first met?
+How did we meet?
+Am I alive?
+How often did you contact me?
+When was the last time you saw me?
+How do you feel about me?
+What common interests do we share?
+What do you miss most about me?
+What are some important memories that you share with me?

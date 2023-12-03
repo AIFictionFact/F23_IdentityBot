@@ -1,67 +1,102 @@
 '''
-This file conducts a conversation between you and the person of your choice
+This file conducts a conversation with the user and the OpenAI API,
+which takes on the personality of the subject by fine tuning the API.
 '''
+
 import openai
-from textblob import TextBlob  # Import sentimental analyzer
+from textblob import TextBlob
 
 # Load key
 with open("API_KEY.txt", "r") as keyfile:
     openai.api_key = keyfile.readline()
 
-# Dictionary to store user data and conversation history
-user_data = {}
+# Dictionary to store conversation history
+conversation_history = []
 
-# Function to store user messages in user_data
-def store_user_data(user_id, user_message):
-    if user_id not in user_data:
-        user_data[user_id] = {"messages": []}
-    user_data[user_id]["messages"].append({"role": "user", "content": user_message})
+def store_user_data(user_message):
+    '''
+    Stores a user message in conversation history
+    '''
+    conversation_history.append({"role": "user", "content": user_message})
 
-# Function to analyze the sentiment of a text using TextBlob 
 def analyze_sentiment(text):
+    '''
+    Analyzes the sentiment of text using TextBlob
+    Returns positive, neutral, or negative
+    '''
     analysis = TextBlob(text)
     return "positive" if analysis.sentiment.polarity > 0 else "neutral" if analysis.sentiment.polarity == 0 else "negative"
 
-# Function to format training data into conversation history
-def train_model(user_responses, subject_responses):
-    training_data = []
-    for question, answer in zip(user_responses.items(), subject_responses.items()):
-        training_data.append({"role": "user", "content": question[1]})
-        training_data.append({"role": "assistant", "content": answer[1]})
-    return training_data
+def tune_model(user_responses, subject_responses, name):
+    '''
+    Fine-tunes the API given a dictionary of user responses, subject responses, and the subject's name
+    This establishes the system role telling the API to respond as if they were the subject
+    It also gives examples of user/assistant roles through fine tuning
+    Returns the tuning data as a list of dictionaries
+    '''
+    tuning_data = []
 
-# Function to get response from GPT model
-def get_gpt_response(conversation_history):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=conversation_history
-    )
-    return response.choices[0].message['content']
+    # System role is just the person's name
+    tuning_data.append({"role": "system", "content": f"Can you respond to the following questions as if you were {name}?"})
 
-# Function to chat with the bot
-def chat_with_bot(user_id, user_message, trained_context):
+    # First sample prompt, to solidify the API is the subject's name
+    tuning_data.append({"role": "user", "content": "Who are you?"})
+    tuning_data.append({"role": "assistant", "content": f"I'm {name}, of course."})
+
+    # User questionnaire is the assistant asking questions and the user responding
+    for question in user_responses.items():
+        tuning_data.append({"role": "assistant", "content": question[0]})
+        tuning_data.append({"role": "user", "content": question[1]})
+
+    # Subject questionnaire is the user asking questions and the assistant responding
+    for question in subject_responses.items():
+        tuning_data.append({"role": "user", "content": question[0]})
+        tuning_data.append({"role": "assistant", "content": question[1]})
+
+    return tuning_data
+
+def get_gpt_response(conversation_history, model):
+    '''
+    Returns the response of the API based on the conversation history
+    '''
+    try:
+        response = openai.ChatCompletion.create(
+            model=model,
+            messages=conversation_history
+        )
+        return response.choices[0].message['content']
+    except openai.error.OpenAIError as e:
+        print("An error occurred with the OpenAI API:", e)
+        return "Error: Could not generate a response."
+
+def chat_with_bot(user_message, trained_context, model):
+    '''
+    Sends a user message to the bot, and returns the bot's response
+    '''
     sentiment = analyze_sentiment(user_message)
-    conversation_history = trained_context + user_data[user_id]["messages"].copy()
-    conversation_history.append({"role": "user", "content": f"{user_message} [Sentiment: {sentiment}]"})
+    full_conversation_history = trained_context + conversation_history.copy()
+    full_conversation_history.append({"role": "user", "content": f"{user_message}, this message is in a {sentiment} tone."})
     
-    # Get bot's response using GPT model
-    bot_message = get_gpt_response(conversation_history)
+    bot_message = get_gpt_response(full_conversation_history, model)
     
-    # Store bot's message in the conversation history
-    user_data[user_id]["messages"].append({"role": "assistant", "content": bot_message})
+    conversation_history.append({"role": "assistant", "content": bot_message})
     return bot_message
 
-# Conversation
-def conduct_conversation(user_id, user_responses, subject_responses):
-    trained_context = train_model(user_responses, subject_responses)
+def conduct_conversation(model, user_responses, subject_responses, name):
+    '''
+    Runs a loop to conduct the entire conversation with the bot
+    '''
+    trained_context = tune_model(user_responses, subject_responses, name)
     stop_word = "stop"
-    response = ""
+    user_message = ""
 
     print("Welcome to IdentityBot. Type 'stop' at any time to end the chat.")
-    print("Hi there! It's been a while. How have you been doing?")
+    print()
 
-    while response != stop_word:
+    while user_message != stop_word:
         user_message = input("You: ")
-        store_user_data(user_id, user_message)
-        bot_response = chat_with_bot(user_id, user_message, trained_context)
-        print(f"Bot: {bot_response}")
+        if user_message == stop_word:
+            break
+        store_user_data(user_message)
+        bot_response = chat_with_bot(user_message, trained_context, model)
+        print(f"{name}: {bot_response}")

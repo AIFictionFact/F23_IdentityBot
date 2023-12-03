@@ -1,3 +1,12 @@
+'''
+This file contains the main code for IdentityBot.
+It uses two other Python files, interviewer.py and conversation.py.
+
+It facilitates conducting a conversation with a subject of the user's choice,
+based on their description of the subject, which is used to fine-tune
+the OpenAI ChatGPT API to replicate the subject.
+'''
+
 # Import openai and os
 import os
 import openai
@@ -5,20 +14,6 @@ import openai
 # Import interviewer and conversation modules
 import interviewer
 import conversation
-
-# Load a file into a dictionary, for testing
-def load_dictionary(filename):
-    file = open(filename, "r")
-    dictionary = {}
-    for line in file:
-        line = line.split("|")
-        line[0] = line[0].strip()
-        line[1] = line[1].strip()
-        # Skip blank responses
-        if line[1] == "":
-            continue
-        dictionary[line[0]] = line[1]
-    return dictionary
 
 def main():
 
@@ -43,38 +38,53 @@ def main():
 
     user_responses = {}
     subject_responses = {}
+    name = ""
 
     # Manual input answers
     if user_input == "1":
         print()
-        print("Part 1: Questions about you")
-        print("In this stage of the interview, we will ask about you to better understand your preferences and personality.")
+        print("In this interview, you can skip questions at any time. Just press enter to move on.")
+        print()
+        print("Part 1: Responses from you")
+        print("In this stage of the interview, we will simulate your subject asking you questions. Please respond from your perspective.")
+        print()
         
-        user_responses = interviewer.interview("user_questions.txt")
-        print(user_responses)
+        user_responses, name = interviewer.interview("user_questions.txt")
 
         print()
-        print("Part 2: Questions about your subject")
-        print("In the second stage of the interview, we will ask about the subject athat you wish to have a conversation with to gain a better understanding of who they are as a person.")
-        
-        subject_responses = interviewer.interview("subject_questions.txt")
+        print("Part 2: Responses from your subject")
+        print("In the second stage of the interview, we will ask about the subject to gain a better understanding of who they are as a person.")
+        print("In this section, answer the questions as if you were your subject. Respond as you think they would to these questions.")
+        print()
+
+        subject_responses, _ = interviewer.interview("subject_questions.txt")
 
     # Import file
     else:
         filename = input("Please enter the file for user responses: ").strip()
-        user_responses = load_dictionary(filename)
+        user_responses, name = interviewer.load_dictionary(filename)
         filename = input("Please enter a file for subject responses: ")
-        subject_responses = load_dictionary(filename)
-    print(user_responses)
-    print(subject_responses)
+        subject_responses, _ = interviewer.load_dictionary(filename)
 
+    
+    # Text history - not implemented
+    '''
     print()
 
+    user_input = ""
+    while (user_input.lower() != "yes" and user_input.lower() != "no"):
+        user_input = input(f"[Optional] Would you like to import texts between you and {name}? Please respond yes or no. ").strip()
+
+    if user_input.lower() == "yes":
+        # Import texts
+        pass
+    '''
+
     # Train the AI
-    model = conversation.train_model(user_responses, subject_responses)
+    model = "gpt-3.5-turbo"
 
     # Have a conversation
-    conversation.conduct_conversation(model, user_responses, subject_responses)
+    conversation.conduct_conversation(model, user_responses, subject_responses, name)
     
 
 if __name__ == "__main__":

@@ -7,14 +7,23 @@ based on their description of the subject, which is used to fine-tune
 the OpenAI ChatGPT API to replicate the subject.
 '''
 
-# Import openai and os
-import os
+# Import openai and system modules
 import openai
+import time
+import sys
+
+# Import our modules
+import interviewer
 import ui
 
-# Import interviewer and conversation modules
-import interviewer
-import conversation
+def delay_print(s):
+    '''
+    Function to print a string letter by letter
+    '''
+    for c in s:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(0.05)
 
 def main():
 
@@ -23,12 +32,41 @@ def main():
     openai.api_key = keyfile.readline()
 
     keyfile.close()
-    '''
+
     # Intro to the program
-    print("Welcome to IdentityBot, a program that will simulate any person of your choice.")
+    intro = "Welcome to IdentityBot, a program that will simulate any person of your choice.\n"
+    print("-"*len(intro))
+    delay_print(intro)
+    print("-"*len(intro))
+
+    # Disclaimers
+    print()
+    intro = "Disclaimers\n"
+    print("-"*len(intro))
+    delay_print(intro)
+    print("-"*len(intro))
+
+    print("- IdentityBot is an AI bot and not a substitute for professional psychological help.")
+    print("- IdentityBot is not a substitute for the person you wish to talk to, it only seeks to artificially replicate them.")
+    print("- IdentityBot does not store any of your personal data. It will be discarded after your session.")
+    
+    user_input = ""
+    while user_input.lower() != "yes" and user_input.lower() != "no":
+        print()
+        user_input = input("Do you acknowledge these disclaimers and wish to continue? Please respond yes or no. ==> ").strip()
+        if user_input == "yes":
+            break
+        if user_input == "no":
+            # Exit program if user doesn't agree to disclaimers
+            return
+
 
     # Interview
     print()
+    intro = "Interview\n"
+    print("-"*len(intro))
+    delay_print(intro)
+    print("-"*len(intro))
     print("To begin, we will conduct an interview.")
     print("Please answer each question as accurately as you can.")
     print()
@@ -42,24 +80,29 @@ def main():
     user_responses = {}
     subject_responses = {}
     name = ""
-    '''
-
-    # to be removed:
-    user_input = "2"
 
     # Manual input answers
     if user_input == "1":
         print()
         print("In this interview, you can skip questions at any time. Just press enter to move on.")
+
         print()
-        print("Part 1: Responses from you")
+        intro = "Part 1: Responses from you\n"
+        print("-"*len(intro))
+        delay_print(intro)
+        print("-"*len(intro))
+
         print("In this stage of the interview, we will simulate your subject asking you questions. Please respond from your perspective.")
         print()
         
         user_responses, name = interviewer.interview("user_questions.txt")
 
         print()
-        print("Part 2: Responses from your subject")
+        intro = "Part 2: Responses from your subject\n"
+        print("-"*len(intro))
+        delay_print(intro)
+        print("-"*len(intro))
+
         print("In the second stage of the interview, we will ask about the subject to gain a better understanding of who they are as a person.")
         print("In this section, answer the questions as if you were your subject. Respond as you think they would to these questions.")
         print()
@@ -68,12 +111,10 @@ def main():
 
     # Import file
     else:
-        '''
         filename = input("Please enter the file for user responses: ").strip()
         user_responses, name = interviewer.load_dictionary(filename)
         filename = input("Please enter a file for subject responses: ")
         subject_responses, _ = interviewer.load_dictionary(filename)
-        '''
         user_responses, name = interviewer.load_dictionary("user1.txt")
         subject_responses, _ = interviewer.load_dictionary("subject1.txt")
 

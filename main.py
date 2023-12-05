@@ -115,8 +115,6 @@ def main():
         user_responses, name = interviewer.load_dictionary(filename)
         filename = input("Please enter a file for subject responses: ")
         subject_responses, _ = interviewer.load_dictionary(filename)
-        user_responses, name = interviewer.load_dictionary("user1.txt")
-        subject_responses, _ = interviewer.load_dictionary("subject1.txt")
 
     # Text history - not implemented
     '''
